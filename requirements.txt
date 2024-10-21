@@ -1,0 +1,8 @@
+pickle4
+numpy
+dill
+logger
+pandas
+scipy
+scikit-learn
+Flask

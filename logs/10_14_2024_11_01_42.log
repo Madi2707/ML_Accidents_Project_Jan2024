@@ -1,0 +1,13 @@
+[ 2024-10-14 11:01:43,611 ] 31 root - INFO - Entered the data ingestion method or component
+[ 2024-10-14 11:01:43,642 ] 50 root - INFO - Reading  the dataset as dataframe and basic cleaning completed
+[ 2024-10-14 11:01:43,642 ] 59 root - INFO - Train Test Split initiated
+[ 2024-10-14 11:01:43,658 ] 84 root - INFO - Ingestion of the data completed
+[ 2024-10-14 11:01:43,673 ] 63 root - INFO - Read train and test data completed
+[ 2024-10-14 11:01:43,673 ] 64 root - INFO - Obtaining preprocessing object
+[ 2024-10-14 11:01:43,673 ] 43 root - INFO - Categorical columns encoding completed
+[ 2024-10-14 11:01:43,689 ] 48 root - INFO - Pipeline Colum Transformation completed for..
+[ 2024-10-14 11:01:43,689 ] 49 root - INFO - Categorical columns: ['kpi_cause_code', 'light_code', 'weather_code', 'traffic_code', 'road_type_code', 'road_code', 'collision_code', 'damage_code', 'location_code']
+[ 2024-10-14 11:01:43,689 ] 76 root - INFO - Applying preprocessing object on train and test data
+[ 2024-10-14 11:01:43,705 ] 107 root - INFO - Saved preprocessing object
+[ 2024-10-14 11:01:43,711 ] 26 root - INFO - Split training and test input data
+[ 2024-10-14 11:14:25,531 ] 70 root - INFO - Best found model on both training and testing dataset

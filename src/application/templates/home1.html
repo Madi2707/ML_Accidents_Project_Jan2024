@@ -1,0 +1,238 @@
+<html lang="en">
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+    <meta charset="UTF-8">
+    <title>Accidents ML Application</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href="../static/style.css" rel="stylesheet">
+    
+</head>
+
+<body>
+    
+    <!--<img class="img-logo" src="./ventura.png" alt="ventura logo" > -->
+    <!--<div class="img-logo"></div>-->
+
+    <div class="login">
+        <h1>Predict Accidents Type</h1>
+            
+        <!-- Main Input For Receiving Query to our ML -->
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+
+            <div class="input-group1">
+
+                <!-- Dropdown menu for selecting options from kpi_cause_code_list -->
+                <label class="form-label">Accident Cause</label>
+                <select class="form-control" name="kpi_cause_code" placeholder="Accident Cause" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <!-- <option value="CYC">
+                    Cyclist
+                </option> -->
+                    <option value="EMP">
+                        Employee
+                    </option>
+                    <option value="ENV">
+                        Environmental
+                    </option>
+                    <option value="GEN">
+                        General Public
+                    </option>
+                    <option value="MAT">
+                        Material/Substance
+                    </option>
+                    <!-- <option value="NONPOW">
+                    Non Powered Tools
+                </option> -->
+                    <!--  <option value="POW">
+                    Powered Tools
+                </option> -->
+                    <!-- <option value="PAS">
+                    Passenger
+                </option> -->
+                    <option value="BUS BREAKING">
+                        Bus Braking
+                    </option>
+                    <option value="SURFING">
+                        Bus Surfing
+                    </option>
+                    <option value="ROAD RAGE">
+                        Road Rage
+                    </option>
+                    <option value="ALCO/DRUG">
+                        Passenger - Alcohol/Drug
+                    </option>
+                    <option value="BUS-OTHER">
+                        Bus Other
+                    </option>
+                    <option value="ON/OFF BUS">
+                        Getting On/Off Bus
+                    </option>
+                    <option value="ROA">
+                        ZzOther Road User
+                    </option>
+                    <option value="PL&EQ">
+                        Plant & Equipment
+                    </option>
+                    <option value="CARS TRUCKS">
+                        Car/Truck/Bus
+                    </option>
+                </select>
+            </div>
+
+            <!-- Dropdown menu for selecting options from light_code_list -->
+            <div class="input-group2">
+                <label class="form-label">Light Condition</label>
+                <select class="form-control" name="light_code" placeholder="Light Condition" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="DAY">Day</option>
+                    <option value="NIGHT">Night</option>
+                    <option value="DAWN">Dawn</option>
+                    <option value="DUSK">Dusk</option>
+                    <option value="STREET">Street</option>
+                </select>
+            </div>
+
+            <!-- Dropdown menu for selecting options from weather_code_list -->
+            <div class="input-group3">
+                <label class="form-label">Weather Condition</label>
+                <select class="form-control" name="weather_code" placeholder="Weather Condition" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="SUN">Sun Glare</option>
+                    <!-- <option value="ICE">Ice</option> -->
+                    <option value="RAIN">Rain</option>
+                    <option value="FOG">Fog</option>
+                    <option value="FINE">Fine</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from traffic_code_list -->
+            <div class="input-group4">
+                <label class="form-label">Traffic Condition</label>
+                <select class="form-control" name="traffic_code" placeholder="Traffic Condition" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="NO">No Traffic</option>
+                    <option value="LIGHT">Light</option>
+                    <option value="MODERATE">Moderate</option>
+                    <option value="HEAVY">Heavy</option>
+                    <option value="EXTREME">Extreme</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from road_type_code_list -->
+            <div class="input-group5">
+                <label class="form-label">Road Type</label>
+                <select class="form-control" name="road_type_code" placeholder="Road Type" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="BUS">Bus/Transit Lane</option>
+                    <option value="FREE">Freeway</option>
+                    <option value="MULTI">Multi lane</option>
+                    <option value="SINGLE">Single lane</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from road_code_list -->
+            <div class="input-group6">
+                <label class="form-label">Road</label>
+                <select class="form-control" name="road_code" placeholder="Road Condition" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="DRY">Dry</option>
+                    <option value="WET">Wet</option>
+                    <option value="SLIP">Slippery</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from collision_code_list -->
+            <div class="input-group7">
+                <label class="form-label">Collision Type</label>
+                <select class="form-control" name="collision_code" placeholder="Collision Type" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="HON">Head On</option>
+                    <option value="N2T">Nose to Tail</option>
+                    <option value="TBO">T Bone</option>
+                    <option value="SSW">Side Swipe</option>
+                    <option value="BTMO">Bottom Out</option>
+                    <option value="TAI">Tail Swing</option>
+                    <option value="REVERSING">Reversing</option>
+                    <option value="ROO">Roof Impact</option>
+                    <option value="NA">Not reported</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from damage_code_list -->
+            <div class="input-group8">
+                <label class="form-label">Damage Type</label>
+                <select class="form-control" name="damage_code" placeholder="Damage Type" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="NSF">Near Side Front</option>
+                    <option value="NSM">Near Side Middle</option>
+                    <option value="NSR">Near Side Rear</option>
+                    <option value="OSF">Off Side Front</option>
+                    <option value="OSM">Off Side Mid</option>
+                    <option value="OSR">Off Side Rear</option>
+                    <option value="REAR">Rear</option>
+                    <option value="FRNT">Front</option>
+                    <option value="TOPF">Roof Front</option>
+                    <option value="TOPM">Roof Middle</option>
+                    <!-- <option value="TOPR">Roof Rear</option> -->
+                    <option value="WIN">Side Windows</option>
+                    <option value="WSRE">Windscreen</option>
+                    <option value="MIR">Mirror</option>
+                    <option value="UNREP">Unreported Damage</option>
+                </select>
+            </div>
+            <!-- Dropdown menu for selecting options from location_code_list -->
+            <div class="input-group9">
+                <label class="form-label">Location of Damage</label>
+                <select class="form-control" name="location_code" placeholder="Damage Location" required>
+                    <option class="placeholder" selected disabled value="">Select</option>
+                    <option value="RBT">Roundabout</option>
+                    <option value="TIN">T-Intersection</option>
+                    <option value="RAD">Road</option>
+                    <option value="BSP">Bus Stop</option>
+                    <option value="XRD">Crossroad</option>
+                    <option value="DEPOT">In Depot</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-primary btn-large" style="background-color: aquamarine; color: black; width: 400px;">Predict</button>
+
+        </form>
+        <h2>
+            <br>
+            The Accident type will be
+            {% if results == 0 %}
+            <span style="color: orange;">'Incident'</span>
+            {% elif results == 1 %}
+            <span style="color: orange;">'Third Party Fault'</span>
+            {% elif results == 2 %}
+            <span style="color: orange;">'Bus Hits Bus'</span>
+            {% elif results == 3 %}
+            <span style="color: orange;">'Pending Liability'</span>
+            {% elif results == 4 %}
+            <span style="color: orange;">'Driver Fault'</span>
+            {% elif results == 5 %}
+            <span style="color: orange;">'Unknown Third Party'</span>
+            {% elif results == 6 %}
+            <span style="color: orange; ">'Unreported'</span>
+            {% else %}
+            <span style="color: white;">'Unknown'</span>
+            {% endif %}
+
+        </h2>
+    </div>
+
+    <script>
+       
+        // Function to reset the form and clear the results
+        function resetForm() {
+            // Reset the form by selecting it and calling the reset() method
+            document.querySelector('form').reset();
+
+            // Clear the results by setting the innerHTML of the results element to an empty string
+            document.querySelector('#results').innerHTML = '';
+        }
+
+        // Call the resetForm function when the page loads
+        window.onload = resetForm;
+    </script>
+
+</body>
+</html>
